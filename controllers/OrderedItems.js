@@ -22,8 +22,6 @@ class OrderedItems {
             return res.status(500).json({ message: "Error encountered" });
         }
     }
-
-
     
     async getItemsHandler(req, res) {
         /**
@@ -71,8 +69,10 @@ class OrderedItems {
                 return res.status(400).json({ message: "Invalid user_id or product_uuid" });
             }
 
+            console.log(product_uuid, user_id);
             const items = await orderItems.getItemById(product_uuid, user_id);
 
+            console.log(items);
             if (items) {
                 return res.status(200).json(items);
             } else {

@@ -5,7 +5,6 @@ class Register {
         const { name, email, username, password } = req.body;
 
         try {
-            
             const result = await UsersController.postNew(req, res);
             
             //redirections still giving me issue here

@@ -1,0 +1,82 @@
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
+const dbConnect = require('../utils/mysql');
+const redis = require('redis');
+
+const client = redis.createClient(); // Create a Redis client
+
+class AuthController {
+    async getConnect(req, res) {
+        try {
+            const authHeader = req.headers.authorization;
+            if (!authHeader) {
+                return res.status(401).json({ error: 'Unauthorized: Missing Authorization header' });
+            }
+
+            const authData = authHeader.split(' ')[1];
+            if (!authData) {
+                return res.status(401).json({ error: 'Missing authorization data' });
+            }
+
+            const [email, password] = Buffer.from(authData, 'base64').toString().split(':');
+            const user = await dbConnect.getUser(email);
+
+            if (!user) {
+                return res.status(401).json({ error: 'Unauthorized: Invalid credentials' });
+            }
+
+            user.password = await dbConnect.getHashedPassword(email);
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+
+            if (isPasswordValid) {
+                const token = uuidv4();
+                // Store the token in Redis with a TTL (time to live)
+                client.setex(token, 3600, email); // Token expires in 1 hour (adjust as needed)
+                return res.status(200).json({ token });
+            } else {
+                return res.status(401).json({ error: 'Unauthorized: Invalid credentials' });
+            }
+        } catch (error) {
+            console.error('Authentication error:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+
+    async getDisconnect(req, res) {
+        try {
+            const authToken = req.headers['x-token'];
+
+            if (!authToken) {
+                return res.status(401).json({ error: 'Unauthorized: Missing X-Token header' });
+            }
+
+            // Check if the token exists in Redis
+            client.exists(authToken, (err, reply) => {
+                if (err) {
+                    console.error('Redis error:', err);
+                    return res.status(500).json({ message: 'Internal Server Error' });
+                }
+
+                if (reply === 1) {
+                    // Token found in Redis, delete it
+                    client.del(authToken, (err) => {
+                        if (err) {
+                            console.error('Redis error:', err);
+                            return res.status(500).json({ message: 'Internal Server Error' });
+                        }
+                        return res.status(204).json('Logged out');
+                    });
+                } else {
+                    return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+                }
+            });
+        } catch (error) {
+            console.error('Sign-out error:', error);
+            res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
+}
+
+const authController = new AuthController();
+
+module.exports = authController;

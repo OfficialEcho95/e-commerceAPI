@@ -72,11 +72,15 @@ class OrderItems {
 
     async getItemById(product_uuid, user_id) {
         this.user_id = user_id;
-        const command = `SELECT * FROM order_items WHERE product_uuid = ? AND user_id = ?`;
+        const command = `SELECT order_items.*, products.price, products.name
+        FROM order_items
+        INNER JOIN products ON order_items.product_uuid = products.product_uuid
+        WHERE order_items.product_uuid = ? AND order_items.user_id = ?`;
         try {
+            console.log('Executing SQL query:', command);
             const [items] = await dbConnect.con.promise().query(command, [product_uuid, user_id]);
             
-            if (items !== null || items.length > 0) {
+            if (items !== null && items.length > 0) {
                 return items[0];
             }
             else {

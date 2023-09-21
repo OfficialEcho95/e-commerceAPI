@@ -16,10 +16,7 @@ class Login {
 
             //i try to redirect to the index file here. fails
             if (response.status === 200) {
-                res.writeHead(302, {
-                    'Location': '/index'
-                  });
-                  res.end();
+                res.status(response.status).json("login successful")
             } else {
                 res.status(500).json({ message: "User login failed" });
             }

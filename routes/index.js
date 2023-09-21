@@ -14,14 +14,16 @@ const orderedItems = require('../controllers/OrderedItems');
 const checkout = require('../controllers/OrdersController')
 const register = require('../backend/register');
 const login = require('../backend/login');
+const prod = require('../backend/products_control')
+
 
 router.get('/status', AppController.getStatus);
 router.post('/user', UsersController.postNew);
 router.delete('/remove', UsersController.deleteUser);
 router.post('/update', UsersController.updateUser);
 router.get('/user/:email', UsersController.getUserDetails);
-router.get('/connect', AuthController.getConnect);
-router.get('/disconnect', AuthController.getDisconnect);
+router.post('/login', AuthController.login);
+router.get('/logout', AuthController.logout);
 router.post('/addProduct', productController.addProduct);
 router.get('/item/:productId', productController.getItem);
 router.get('/search', productController.searchProduct);
@@ -48,9 +50,6 @@ router.delete('/delete-order/:order_id', checkout.deleteOrderHandler);
 //from frontend
 router.post('/signup', register.registerUser);
 router.post('/login', login.loginUser);
-router.get('/index', (req, res) => {
-    const filePath = path.join(__dirname, 'frontend', 'index.html');
-    res.send(filePath);
-});
+router.get('/AProduct/:productId', prod.products_control);
 
 module.exports = router;
