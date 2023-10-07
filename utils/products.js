@@ -20,9 +20,29 @@ class ProductsController {
         }
     }
 
+
+    async getAllItems() {
+        try {
+            const command = "SELECT * FROM products";
+
+            const [allItems] = await dbConnect.con.promise().query(command);
+
+            if (!allItems || allItems.length == 0) {
+                return [];
+            }
+            else {
+                return allItems;
+            }
+        } catch (error) {
+            console.error("Error fetching from the database:", error);
+            return null;
+        }
+    }
+
+
     async getItemDetails(id) {
         try {
-            const command = "SELECT name, description, price, quantity, image_url, rating FROM products where product_uuid = ?";
+            const command = "SELECT name, description, price, quantity, image_url, product_uuid, rating FROM products where product_uuid = ?";
             const [itemDetails] = await dbConnect.con.promise().query(command, [id]);
 
             if (itemDetails && itemDetails.length > 0) {

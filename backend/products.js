@@ -1,14 +1,12 @@
-const dbConnect = require('../utils/mysql'); // Import your MySQL connection module
+const dbConnect = require('../utils/mysql');
 
-class Product {
-    constructor(user_id, product_id) {
-        this.user_id = user_id;
+class ProductDetails {
+    constructor(product_id) {
         this.product_id = product_id;
     }
 
     async getProperty(propertyName) {
         try {
-            
             const command = `
                 SELECT ${propertyName}
                 FROM products
@@ -27,12 +25,15 @@ class Product {
         }
     }
 
-    async displayPrice() {
-        return this.getProperty('price');
+    async product_uuid() {
+        return this.getProperty('product_uuid');
     }
-
     async displayName() {
         return this.getProperty('name');
+    }
+
+    async displayPrice() {
+        return this.getProperty('price');
     }
 
     async displayDescription() {
@@ -48,4 +49,4 @@ class Product {
     }
 }
 
-module.exports = Product;
+module.exports = ProductDetails;

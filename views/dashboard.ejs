@@ -1,0 +1,260 @@
+<!-- Header -->
+<%- include('./partials/header') %>
+
+<!-- Title page -->
+<section class="bg-img1 txt-center p-lr-15">
+  <h2 class="ltext-105 cl0 txt-center">Login</h2>
+</section>
+
+<!-- Content page -->
+<section class="bg0 p-b-50">
+  <div class="container">
+    <div class="dashboard-area section-padding-100">
+      <div>
+        <div class="row">
+          <div class="col-12">
+            <div class="clearfix">
+              <div class="account-tabs">
+                <div class="tab-headings">
+                  <button
+                    class="tab-buttons pending-orders active"
+                    onclick="openTabs('pending-orders')"
+                  >
+                    Pending Orders (2)
+                  </button>
+                  <button
+                    class="tab-buttons closed-orders"
+                    onclick="openTabs('closed-orders')"
+                  >
+                    Closed Orders (5)
+                  </button>
+                  <button
+                    class="tab-buttons edit-profile"
+                    onclick="openTabs('edit-profile')"
+                  >
+                    Edit Profile
+                  </button>
+                </div>
+
+                <div id="pending-orders" class="dashboard-tabs">
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-01.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status in-progress">In progress</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-02.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status in-progress">In progress</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  id="closed-orders"
+                  class="dashboard-tabs"
+                  style="display: none"
+                >
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-03.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status completed">Completed</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-04.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status completed">Completed</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-05.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status cancelled">Cancelled</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-06.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status completed">Completed</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-card">
+                    <img
+                      class="order-img"
+                      src="/images/product-07.jpg"
+                      alt=""
+                    />
+                    <div class="order-details">
+                      <div>
+                        <h5 class="order-no">Order No: 23457340</h5>
+                        <h3 class="order-title">
+                          This is the product you wanted badly very baddly
+                        </h3>
+                      </div>
+                      <div>
+                        <h6 class="order-status cancelled">Cancelled</h6>
+                        <h3 class="order-date">12-September-2023</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  id="edit-profile"
+                  class="dashboard-tabs"
+                  style="display: none"
+                >
+                  <div class="card-body profile-card">
+                    <div class="form-group">
+                      <label class="form-label">Username</label>
+                      <input
+                        type="text"
+                        class="form-control mb-1"
+                        value="nmaxwell"
+                        disabled
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        value="Nelle Maxwell"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">E-mail</label>
+                      <input
+                        type="text"
+                        class="form-control mb-1"
+                        value="nmaxwell@mail.com"
+                        disabled
+                      />
+                    </div>
+                    <button type="submit" class="btn edit-btn">Submit</button>
+                  </div>
+                  <div class="card-body profile-card">
+                    <div class="form-group">
+                      <label class="form-label">Current password</label>
+                      <input type="password" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">New password</label>
+                      <input type="password" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Repeat new password</label>
+                      <input type="password" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn edit-btn">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function openTabs(tabName) {
+    var i;
+    var x = document.getElementsByClassName("dashboard-tabs");
+    var tabButtons = document.getElementsByClassName("tab-buttons");
+    for (i = 0; i < tabButtons.length; i++) {
+      tabButtons[i].classList.remove("active");
+    }
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(tabName).style.display = "block";
+    document.querySelector("." + tabName).classList.add("active");
+  }
+</script>
+
+<!-- Footer -->
+<%- include('./partials/footer') %>

@@ -13,18 +13,10 @@ class AuthController {
 
   async login(req, res) {
     try {
-      const authHeader = req.headers.authorization;
-      if (!authHeader) {
-        return res.status(401).json({ error: 'Unauthorized: Missing Authorization header' });
-      }
-
-      const authData = authHeader.split(' ')[1];
-      if (!authData) {
-        return res.status(401).json({ error: 'Missing authorization data' });
-      }
-
-      const [email, password] = Buffer.from(authData, 'base64').toString().split(':');
+      const email = req.body.email;
+      const password = req.body.password;
       const user = await dbConnect.getUser(email);
+      console.log(user);
 
       if (!user) {
         return res.status(401).json({ error: 'Unauthorized: Invalid credentials' });
@@ -35,11 +27,11 @@ class AuthController {
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (isPasswordValid) {
-        const token = this.generateToken(user.user_id);
-        this.tokenStore.set(token, { user_id: user.user_id, email, expiration: Date.now() + TOKEN_EXPIRATION_TIME });
-        return res.status(200).json({ token });
+        const token = this.generateToken(user.id);
+        this.tokenStore.set(token, { user_id: user.id, email, expiration: Date.now() + TOKEN_EXPIRATION_TIME });
+        return { token };
       } else {
-        return res.status(401).json({ error: 'Unauthorized: Invalid credentials' });
+        return { error: 'Unauthorized: Invalid credentials' };
       }
     } catch (error) {
       console.error('Authentication error:', error);

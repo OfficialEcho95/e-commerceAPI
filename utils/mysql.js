@@ -72,7 +72,7 @@ class DBConnect {
 
 
     async getUser(email) {
-      const command = 'SELECT name, email, username FROM users WHERE email = ?';
+      const command = 'SELECT name, email, username, id FROM users WHERE email = ?';
       try {
         const [rows] = await this.con.promise().query(command, [email]);
         if (rows.length > 0) {

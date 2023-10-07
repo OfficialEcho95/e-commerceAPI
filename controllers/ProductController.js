@@ -1,3 +1,4 @@
+const { tryCatch } = require("bull/lib/utils");
 const dbConnect = require("../utils/mysql");
 const productsController = require("../utils/products");
 const product = require('../utils/products');
@@ -29,7 +30,7 @@ class ProductController {
     //this feature doesn't work correctly yet
     async getItem(req, res) {
         try {
-            const {product_uuid} = req.params.product_uuid;
+            const {product_uuid} = req.query.product_uuid;
             if (!product_uuid) {
                 return res.status(400).json({ message: "Enter a valid uuid" });
             }
@@ -74,6 +75,23 @@ class ProductController {
         }
     }
     
+
+    async getAllItemHandler(req, res) {
+        try {
+            const allItems = await product.getAllItems();
+
+            if (allItems === null) {
+                console.error("There no items in the database");
+                res.status(400).json({message: "Error fetching from the database"});
+            }
+            else {
+                res.status(200).json(allItems);
+            }
+        } catch (error) {
+            console.log("error fetching from database handler:", error);
+            res.status(500).json({messgae: "error from handler"});
+        }
+    }
 
     async searchProduct(req, res) {
         try {

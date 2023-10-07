@@ -1,0 +1,87 @@
+<!-- Header -->
+<%- include('./partials/header') %>
+
+<!-- Title page -->
+<section class="bg-img1 txt-center p-lr-15">
+  <h2 class="ltext-105 cl0 txt-center">Login</h2>
+</section>
+
+<!-- Content page -->
+<section class="bg0 p-b-50">
+  <div class="container">
+    <div class="flex-w flex justify-content-center">
+      <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+        <form action="/paystack" method="post">
+          <h4 class="font-weight-bold mtext-105 cl2 txt-center">
+            Billing Information
+          </h4>
+          <p class="txt-center p-b-14">
+            Please enter your information to proceed
+          </p>
+
+          <div class="bor8 m-b-20 how-pos4-parent">
+            <input
+              class="stext-111 cl2 plh3 size-116 p-lr-30"
+              type="email"
+              name="email"
+              required
+              placeholder="Billing Email Address"
+            />
+          </div>
+          <div class="bor8 m-b-20 how-pos4-parent">
+            <input
+              class="stext-111 cl2 plh3 size-116 p-lr-30"
+              type="text"
+              name="street"
+              required
+              placeholder="Street Address"
+            />
+          </div>
+          <div class="bor8 m-b-20 how-pos4-parent">
+            <input
+              class="stext-111 cl2 plh3 size-116 p-lr-30"
+              type="number"
+              name="zipCode"
+              required
+              placeholder="Zip Code"
+            />
+          </div>
+          <div class="bor8 m-b-20 how-pos4-parent">
+            <input
+              class="stext-111 cl2 plh3 size-116 p-lr-30"
+              type="text"
+              name="city"
+              required
+              placeholder="City"
+            />
+          </div>
+          <div hidden class="bor8 m-b-20 how-pos4-parent">
+            <input
+              class="stext-111 cl2 plh3 size-116 p-lr-30"
+              type="text"
+              name="orders"
+              value="<%= JSON.stringify(cart.items) %>"
+            />
+          </div>
+          <div hidden class="bor8 m-b-20 how-pos4-parent">
+            <input
+              class="stext-111 cl2 plh3 size-116 p-lr-30"
+              type="text"
+              name="amount"
+              value="<%= cart.totalCost %>"
+            />
+          </div>
+
+          <button
+            class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+          >
+            Proceed to Payment
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<%- include('./partials/footer') %>

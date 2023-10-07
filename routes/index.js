@@ -14,7 +14,7 @@ const orderedItems = require('../controllers/OrderedItems');
 const checkout = require('../controllers/OrdersController')
 const register = require('../backend/register');
 const login = require('../backend/login');
-const prod = require('../backend/products_control')
+const prod = require('../backend/products_endpoint')
 
 
 router.get('/status', AppController.getStatus);
@@ -31,6 +31,7 @@ router.get('/highRating/:rating', productController.getHighestRating);
 router.get('/priceRange/:min/:max', productController.getPriceRange);
 router.get('/prices-in-asc', productController.getPricesInAsc);
 router.put('/update-price/:product_id', productController.updatePriceHandler);
+router.get('/allItems', productController.getAllItemHandler);
 
 // Cart Routes
 router.post('/addItem', orderedItems.addItemHandler);
@@ -50,6 +51,6 @@ router.delete('/delete-order/:order_id', checkout.deleteOrderHandler);
 //from frontend
 router.post('/signup', register.registerUser);
 router.post('/login', login.loginUser);
-router.get('/AProduct/:productId', prod.products_control);
+router.get('/AProduct/:product_id', prod.productEndPoint);
 
 module.exports = router;

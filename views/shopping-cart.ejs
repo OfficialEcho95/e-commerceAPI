@@ -1,0 +1,204 @@
+<!-- Header -->
+<%- include('./partials/header') %>
+
+<!-- breadcrumb -->
+<div class="container">
+  <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+    <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+      Home
+      <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+    </a>
+    <span class="stext-109 cl4"> Shoping Cart </span>
+  </div>
+</div>
+
+<!-- Shopping Cart -->
+<form class="bg0 p-t-75 p-b-85">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+        <div class="m-l-25 m-r--38 m-lr-0-xl">
+          <div class="wrap-table-shopping-cart">
+            <table class="table-shopping-cart">
+              <tr class="table_head">
+                <th class="column-1">Product</th>
+                <th class="column-2"></th>
+                <th class="column-3">Price</th>
+                <th class="column-4">Quantity</th>
+                <th class="column-5">Total</th>
+              </tr>
+              <% if(cart.items.length > 0) { %> <% for(let item of cart.items){
+              %>
+              <tr class="table_row" name="cart-items">
+                <td class="column-1">
+                  <div class="how-itemcart1">
+                    <img src="<%= item.productImage %>" alt="IMG" />
+                  </div>
+                </td>
+                <td class="column-2"><%= item.productTitle %></td>
+                <td class="column-3">$ <%= item.productPrice %></td>
+                <td class="column-4">
+                  <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                    <div
+                      class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+                    >
+                      <i class="fs-16 zmdi zmdi-minus"></i>
+                    </div>
+
+                    <input
+                      class="productQty mtext-104 cl3 txt-center num-product"
+                      type="number"
+                      name="productQty"
+                      min="1"
+                      value="<%= item.productQty %>"
+                    />
+
+                    <div
+                      class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                    >
+                      <i class="fs-16 zmdi zmdi-plus"></i>
+                    </div>
+                    <input
+                      hidden
+                      type="number"
+                      name="productId"
+                      class="productId"
+                      value="<%= item.productId %>"
+                    />
+                  </div>
+                </td>
+                <td class="column-5">
+                  $ <%= item.productPrice * item.productQty %>
+                </td>
+              </tr>
+              <% } %> <% } else { %>
+
+              <tr class="table_row text-center">
+                <td colspan="7">
+                  <div class="d-flex flex-column align-items-center w-100">
+                    <h5>Your cart is empty!</h5>
+                    <a
+                      href="index"
+                      class="flex-c-m stext-101 cl0 size-101 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer m-t-6"
+                    >
+                      Homepage
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <% } %>
+            </table>
+          </div>
+          <div 
+          <%= cart.items.length === 0 ? 'hidden' : '' %>
+          class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+            <div class="flex-w flex-m m-r-20 m-tb-5">
+              <button
+                id="emptyCart"
+                class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-5"
+              >
+                Empty Cart
+              </button>
+            </div>
+            <button
+              id="updateCart"
+              class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+            >
+              Update Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+        <div
+          class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm"
+        >
+          <h4 class="mtext-109 cl2 p-b-30">Cart Totals</h4>
+
+          <div class="flex-w flex-t bor12 p-b-13">
+            <div class="size-208">
+              <span class="stext-110 cl2"> Subtotal: </span>
+            </div>
+
+            <div class="size-209">
+              <span class="mtext-110 cl2"> $<%= cart.totalCost %> </span>
+            </div>
+          </div>
+
+          <div class="flex-w flex-t bor12 p-t-20 p-b-20">
+            <div class="size-208 w-full-ssm">
+              <span class="stext-110 cl2"> Shipping: </span>
+            </div>
+
+            <div class="size-209">
+              <span class="mtext-110 cl2"> $0 </span>
+            </div>
+          </div>
+
+          <div class="flex-w flex-t p-t-27 p-b-33">
+            <div class="size-208">
+              <span class="mtext-101 cl2"> Total: </span>
+            </div>
+
+            <div class="size-209 p-t-1">
+              <span class="mtext-110 cl2"> $<%= cart.totalCost %> </span>
+            </div>
+          </div>
+
+          <% if(cart.items.length > 0) { %>
+          <a href="/checkout"
+            class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
+          >
+            Proceed to Checkout
+          </a>
+          <% } else { %>
+          <button disabled
+            class="flex-c-m stext-101 cl2 size-116 bg8 bor14 p-lr-15 trans-04 not-allowed"
+          >
+            Proceed to Checkout
+          </button>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  document.getElementById("emptyCart").addEventListener("click", (e) => {
+    e.preventDefault();
+    alert("Are you sure you want to empty your cart?");
+    window.location.href = "/cart/remove-all";
+  });
+
+  document.getElementById("updateCart").addEventListener("click", async (e) => {
+    e.preventDefault();
+    let products = [];
+    const items = document.querySelectorAll('tr[name="cart-items"]');
+
+    items.forEach((item, i) => {
+      products.push({
+        id: item.querySelector(".productId").value,
+        qty: item.querySelector(".productQty").value,
+      });
+    });
+    await fetch('/cart/update', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(products)
+  }).then(response => response.text()).then(data => {
+    alert(data);
+    location.reload();
+  }).catch(()=>{
+    alert('Something went wrong');
+  });
+    
+  });
+</script>
+
+<!-- Footer -->
+<%- include('./partials/footer') %>

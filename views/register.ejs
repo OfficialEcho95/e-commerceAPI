@@ -1,0 +1,89 @@
+	<!-- Header -->
+	<%- include('./partials/header') %>
+
+
+    <!-- Title page -->
+    <section class="bg-img1 txt-center p-lr-15">
+      <h2 class="ltext-105 cl0 txt-center">Login</h2>
+    </section>
+
+    <!-- Content page -->
+    <section class="bg0 p-b-50">
+      <div class="container">
+        <div class="flex-w flex justify-content-center">
+          <div
+            class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md"
+          >
+            <form action="/user/register" method="POST">
+              <h4 class="font-weight-bold mtext-105 cl2 txt-center">
+                Register
+              </h4>
+              <p class="txt-center p-b-14">
+                Enter your details to create an account
+              </p>
+
+              <div class="bor8 m-b-20 how-pos4-parent">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-lr-30"
+                  type="text"
+                  name="fullname"
+                  placeholder="Your Full Name"
+                  required
+                />
+              </div>
+              <div class="bor8 m-b-20 how-pos4-parent">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-lr-30"
+                  type="text"
+                  name="username"
+                  placeholder="Your Username"
+                  required
+                />
+              </div>
+              <div class="bor8 m-b-20 how-pos4-parent">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-lr-30"
+                  type="text"
+                  name="email"
+                  placeholder="Your Email Address"
+                  required
+                />
+              </div>
+              <div class="m-b-20 bor8 how-pos4-parent">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-lr-30"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+              <div class="m-b-30 bor8 how-pos4-parent">
+                <input
+                  class="stext-111 cl2 plh3 size-116 p-lr-30"
+                  type="password"
+                  name="cpassword"
+                  placeholder="Confirm your password"
+                  required
+                />
+              </div>
+                
+              <button
+                class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+              >
+                Submit
+              </button>
+              <div class="txt-center">
+                <p>
+                  Already have an account?
+                  <a class="text-danger" href="login">Login</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <%- include('./partials/footer') %>
