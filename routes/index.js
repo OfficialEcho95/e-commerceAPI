@@ -11,11 +11,7 @@ const UsersController = require('../controllers/UsersController');
 const AuthController = require('../controllers/AuthController');
 const productController = require('../controllers/ProductController');
 const orderedItems = require('../controllers/OrderedItems');
-const checkout = require('../controllers/OrdersController')
-const register = require('../backend/register');
-const login = require('../backend/login');
-const prod = require('../backend/products_endpoint')
-
+const checkout = require('../controllers/OrdersController');
 
 router.get('/status', AppController.getStatus);
 router.post('/user', UsersController.postNew);
@@ -47,10 +43,5 @@ router.get('/user-cart', checkout.orderDetailsHandler);
 router.put('/status-update/:order_id', checkout.updateOrderStatusHandler);
 router.put('/cancel-order/:order_id', checkout.cancelOrderHandler);
 router.delete('/delete-order/:order_id', checkout.deleteOrderHandler);
-
-//from frontend
-router.post('/signup', register.registerUser);
-router.post('/login', login.loginUser);
-router.get('/AProduct/:product_id', prod.productEndPoint);
 
 module.exports = router;
