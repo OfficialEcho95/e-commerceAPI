@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
 const middleware = require("../middleware");
 const https = require("https");
 
