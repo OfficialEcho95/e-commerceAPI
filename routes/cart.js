@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const axios = require("axios");
 
 
 // GET: add a product to the shopping cart when "Add to cart" button is pressed
