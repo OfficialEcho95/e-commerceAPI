@@ -12,7 +12,6 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: ".env" });
 
-
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
